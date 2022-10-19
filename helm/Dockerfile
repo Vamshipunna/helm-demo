@@ -26,8 +26,8 @@ RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -
 COPY --from=build /usr/local/bin/helm /usr/local/bin/
 COPY --from=build /docker-credential-gcr /usr/local/bin/
 
-COPY version-check.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/version-check.sh
+# COPY version-check.sh /usr/local/bin/
+# RUN chmod +x /usr/local/bin/version-check.sh
 
 RUN useradd -ms /bin/bash helm
 
