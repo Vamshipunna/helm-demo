@@ -1,6 +1,6 @@
 FROM ubuntu:20.04 as build
 
-ENV HELM3_VERSION=3.8
+ENV HELM3_VERSION=3.8.1
 
 RUN set -x && apt-get update && apt-get install curl -y 
     
