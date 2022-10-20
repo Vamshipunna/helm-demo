@@ -3,7 +3,6 @@ FROM ubuntu:20.04 as build
 ENV HELM3_VERSION=3.8.1
 ENV GCR_VERSION=2.1.0
 
-RUN export HELM_CACHE_HOME=/tmp
 RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     curl ca-certificates && \
     rm -rf /var/lib/apt/lists/*
