@@ -24,11 +24,13 @@ RUN ls -ll
 
 RUN pwd
 
-RUN tar /builder/docker-credential-gcr*.tar.gz 
+RUN tar xvzf /builder/docker-credential-gcr*.tar.gz 
 
 RUN pwd
 
 RUN ls -la
+
+RUN chmod +x docker-credential-gcr
     
 #RUN find / -iname docker-credential-gcr*
 
