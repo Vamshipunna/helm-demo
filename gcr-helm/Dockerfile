@@ -21,6 +21,12 @@ RUN curl --fail -sSL -O https://github.com/GoogleCloudPlatform/docker-credential
 
 RUN ls -ll
 
+RUN pwd
+
+COPY docker-credential-gcr*.tar.gz  /builder
+
+RUN ls -la
+
 COPY /docker-credential-gcr*.tar.gz  /builder
 
 RUN tar /builder/docker-credential-gcr*.tar.gz 
