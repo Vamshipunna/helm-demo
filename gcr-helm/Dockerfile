@@ -19,8 +19,8 @@ RUN chmod +x /builder/helm.bash && \
 # docker-credential-gcr
 RUN curl --fail -sSL -O https://github.com/GoogleCloudPlatform/docker-credential-gcr/releases/download/v${GCR_VERSION}/docker-credential-gcr_linux_amd64-${GCR_VERSION}.tar.gz && \
     tar xvzf docker-credential-gcr*.tar.gz --strip-components=1 -C /builder/helm && \
-    rm docker-credential-gcr*.tar.gz
-	chmod +x docker-credential-gcr
+    rm docker-credential-gcr*.tar.gz && \
+    chmod +x docker-credential-gcr
 
 ENV PATH=/builder/helm/:$PATH
 
