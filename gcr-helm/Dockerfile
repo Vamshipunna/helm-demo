@@ -4,7 +4,7 @@ ARG HELM_VERSION=v3.7.0
 ENV HELM_VERSION=$HELM_VERSION
 
 COPY helm.bash /builder/helm.bash
-
+							 
 RUN chmod +x /builder/helm.bash && \
   mkdir -p /builder/helm && \
   apt-get update && \
@@ -15,7 +15,20 @@ RUN chmod +x /builder/helm.bash && \
   apt-get --purge -y autoremove && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
+  
+# docker-credential-gcr
+RUN curl --fail -sSL -O https://github.com/GoogleCloudPlatform/docker-credential-gcr/releases/download/v${GCR_VERSION}/docker-credential-gcr_linux_amd64-${GCR_VERSION}.tar.gz && \
+    tar xvzf docker-credential-gcr*.tar.gz --strip-components=1 -C /builder/helm && \
+    rm docker-credential-gcr*.tar.gz
+	chmod +x docker-credential-gcr
 
 ENV PATH=/builder/helm/:$PATH
+
+RUN useradd -ms /bin/bash helm
+
+USER helm
+
+# Configure the credential helper for GCR and Artifact Registry
+RUN docker-credential-gcr configure-docker -include-artifact-registry
 
 ENTRYPOINT ["/builder/helm.bash"]
