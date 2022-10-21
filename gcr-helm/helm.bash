@@ -102,5 +102,6 @@ else
   if [ "$DEBUG" = true ]; then
       echo "Running: helm $@"
   fi
-  helm "$@"
+  #helm "$@"
+  helm install oci://asia-south1-docker.pkg.dev/devops-365510/helm-demo/swaggerui --version 0.1.0 --generate-name --debug
 fi
