@@ -2,7 +2,7 @@ FROM gcr.io/cloud-builders/gcloud
 
 ARG HELM_VERSION=v3.7.0
 ENV HELM_VERSION=$HELM_VERSION
-ENV GCR_VERSION=2.0.0
+ENV GCR_VERSION=2.0.2
 COPY helm.bash /builder/helm.bash
 							 
 RUN chmod +x /builder/helm.bash && \
@@ -31,6 +31,6 @@ RUN useradd -ms /bin/bash helm
 USER helm
 
 # Configure the credential helper for GCR and Artifact Registry
-RUN docker-credential-gcr configure-docker
+RUN docker-credential-gcr configure-docker --include-artifact-registry
 
 ENTRYPOINT ["/builder/helm.bash"]
