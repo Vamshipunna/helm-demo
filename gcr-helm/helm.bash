@@ -9,10 +9,13 @@ source ~/.bashrc
 # echo "Executing ================= kubectl config current-context"
 # kubectl config current-context
 
-find / -iname .kube
+#find / -iname .kube
 
 echo "Executing =================== gcloud commands"
 gcloud config get-value container/cluster
+
+echo "---------Main command---------"
+gcloud container clusters get-credentials --project="devops-365510" --region="asia-south1" "helm-demo-cluster"
 
 # If there is no current context, get one.
 if [[ $(kubectl config current-context 2> /dev/null) == "" && "$SKIP_CLUSTER_CONFIG" != true ]]; then
