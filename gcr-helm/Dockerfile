@@ -1,14 +1,15 @@
 FROM gcr.io/cloud-builders/gcloud
 
-ARG HELM_VERSION=v3.7.0
+ARG HELM_VERSION=v3.8.1
 ENV HELM_VERSION=$HELM_VERSION
-ENV GCR_VERSION=2.0.2
+ENV GCR_VERSION=2.1.0
 COPY helm.bash /builder/helm.bash
 							 
 RUN chmod +x /builder/helm.bash && \
   mkdir -p /builder/helm && \
   apt-get update && \
   apt-get install -y curl && \
+  curl ca-certificates && \
   curl -SL https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz -o helm.tar.gz && \
   tar zxvf helm.tar.gz --strip-components=1 -C /builder/helm linux-amd64 && \
   rm helm.tar.gz && \
@@ -25,6 +26,8 @@ RUN curl --fail -sSL -O https://github.com/GoogleCloudPlatform/docker-credential
 
 ENV PATH=/builder/helm/:$PATH
 ENV PATH=/builder/docker-credential-gcr/:$PATH
+		
+RUN docker-credential-gcr version
 
 RUN useradd -ms /bin/bash helm
 
