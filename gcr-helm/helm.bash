@@ -38,7 +38,7 @@ EOF
     [[ -z "$cluster" ]] && var_usage
     [ ! "$zone" -o "$region" ] && var_usage
     
-    print -y | gcloud auth configure-docker asia-south1-docker.pkg.dev -y
+    print -y | gcloud auth configure-docker asia-south1-docker.pkg.dev
     
     if [ -n "$region" ]; then
       echo "Running: gcloud container clusters get-credentials --project=\"$project\" --region=\"$region\" \"$cluster\""
