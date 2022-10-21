@@ -67,8 +67,8 @@ if [[ -n $HELM_REPO_NAME && -n $HELM_REPO_URL ]]; then
   helm repo add $HELM_REPO_NAME $HELM_REPO_URL
 fi
 
-echo "Running: helm repo update"
-helm repo list && helm repo update || true
+#echo "Running: helm repo update"
+#helm repo list && helm repo update || true
 
 
 # if 'TILLERLESS=true' is set, run a local tiller server with the secret backend
