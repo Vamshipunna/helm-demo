@@ -4,8 +4,10 @@ export CLOUDSDK_CONTAINER_CLUSTER="helm-demo-cluster"
 export CLOUDSDK_COMPUTE_REGION="asia-south1"
 export GCLOUD_PROJECT="devops-365510"
 
-echo "Executing ================= kubectl config current-context"
-kubectl config current-context
+source ~/.bashrc
+
+# echo "Executing ================= kubectl config current-context"
+# kubectl config current-context
 
 find / -iname config
 
