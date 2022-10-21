@@ -23,9 +23,10 @@ RUN pwd
 #Installing docker-credential-gcr
 RUN mkdir -p /builder/docker-credential-gcr && \
   pwd && \
+  cd /builder/docker-credential-gcr && \
   curl -SL https://github.com/GoogleCloudPlatform/docker-credential-gcr/releases/download/v${GCR_VERSION}/docker-credential-gcr_linux_amd64-${GCR_VERSION}.tar.gz -o docker-credential-gcr.tar.gz && \
   find / -iname docker-credential-gcr.tar.gz && \
-  tar xvzf /builder/docker-credential-gcr/docker-credential-gcr.tar.gz && \
+  tar xvzf docker-credential-gcr.tar.gz && \
   rm docker-credential-gcr*.tar.gz && \
   chmod +x docker-credential-gcr
 
