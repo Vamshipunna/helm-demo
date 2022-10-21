@@ -37,7 +37,9 @@ EOF
 
     [[ -z "$cluster" ]] && var_usage
     [ ! "$zone" -o "$region" ] && var_usage
-
+    
+    gcloud auth configure-docker asia-south1-docker.pkg.dev
+    
     if [ -n "$region" ]; then
       echo "Running: gcloud container clusters get-credentials --project=\"$project\" --region=\"$region\" \"$cluster\""
       gcloud container clusters get-credentials --project="$project" --region="$region" "$cluster"
@@ -117,5 +119,5 @@ else
       echo "Running: helm $@"
   fi
   #helm "$@"
-  helm install oci://asia-south1-docker.pkg.dev/devops-365510/helm-demo/swaggerui --version 0.1.0 --generate-name --debug --kubeconfig /root/.kube/config
+  helm install oci://asia-south1-docker.pkg.dev/devops-365510/helm-demo/swaggerui --version 0.1.0 --generate-name --debug 
 fi
