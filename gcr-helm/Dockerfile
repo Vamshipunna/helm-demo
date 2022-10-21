@@ -22,9 +22,12 @@ RUN curl --fail -sSL -O https://github.com/GoogleCloudPlatform/docker-credential
   tar xvzf /builder/docker-credential-gcr*.tar.gz && \
   rm docker-credential-gcr*.tar.gz && \
   chmod +x docker-credential-gcr
+  
+COPY ./docker-credential-gcr /usr/local/bin/
 
 ENV PATH=/builder/helm/:$PATH
-ENV PATH=/builder/docker-credential-gcr/:$PATH
+
+#ENV PATH=/builder/docker-credential-gcr/:$PATH
 		
 RUN docker-credential-gcr version
 
