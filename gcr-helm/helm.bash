@@ -48,6 +48,7 @@ EOF
 fi
 
 echo "--------kubeconfig-----------"
+sudo su
 ls -ll /root
 cat /root/.kube/config
 # if HELM_VERSION starts with v2, initialize Helm
