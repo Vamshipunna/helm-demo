@@ -9,7 +9,7 @@ source ~/.bashrc
 # echo "Executing ================= kubectl config current-context"
 # kubectl config current-context
 
-find / -iname config
+find / -iname .kube
 
 echo "Executing =================== gcloud commands"
 gcloud config get-value container/cluster
