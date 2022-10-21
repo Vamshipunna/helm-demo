@@ -4,6 +4,14 @@ export CLOUDSDK_CONTAINER_CLUSTER="helm-demo-cluster"
 export CLOUDSDK_COMPUTE_REGION="asia-south1"
 export GCLOUD_PROJECT="devops-365510"
 
+echo "Executing ================= kubectl config current-context"
+kubectl config current-context
+
+find / -iname config
+
+echo "Executing =================== gcloud commands"
+gcloud config get-value container/cluster
+
 # If there is no current context, get one.
 if [[ $(kubectl config current-context 2> /dev/null) == "" && "$SKIP_CLUSTER_CONFIG" != true ]]; then
     # This tries to read environment variables. If not set, it grabs from gcloud
