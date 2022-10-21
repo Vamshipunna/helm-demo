@@ -16,34 +16,26 @@ RUN chmod +x /builder/helm.bash && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
   
-#WORKDIR /builder
-
-RUN ls -ll
-RUN pwd
 #Installing docker-credential-gcr
-RUN mkdir -p /builder/docker-credential-gcr && \
-  pwd && \
-  cd /builder/docker-credential-gcr && \
-  curl -SL https://github.com/GoogleCloudPlatform/docker-credential-gcr/releases/download/v${GCR_VERSION}/docker-credential-gcr_linux_amd64-${GCR_VERSION}.tar.gz -o docker-credential-gcr.tar.gz && \
-  find / -iname docker-credential-gcr.tar.gz && \
-  tar xvzf docker-credential-gcr.tar.gz && \
-  rm docker-credential-gcr*.tar.gz && \
-  chmod +x docker-credential-gcr
 
-RUN cp /builder/docker-credential-gcr/docker-credential-gcr /usr/local/bin/
+# RUN mkdir -p /builder/docker-credential-gcr && \
+#   cd /builder/docker-credential-gcr && \
+#   curl -SL https://github.com/GoogleCloudPlatform/docker-credential-gcr/releases/download/v${GCR_VERSION}/docker-credential-gcr_linux_amd64-${GCR_VERSION}.tar.gz -o docker-credential-gcr.tar.gz && \
+#   find / -iname docker-credential-gcr.tar.gz && \
+#   tar xvzf docker-credential-gcr.tar.gz && \
+#   rm docker-credential-gcr*.tar.gz && \
+#   chmod +x docker-credential-gcr
+
+# RUN cp /builder/docker-credential-gcr/docker-credential-gcr /usr/local/bin/
 
 ENV PATH=/builder/helm/:$PATH
-ENV PATH=/usr/local/bin/docker-credential-gcr/:$PATH
-
-RUN docker-credential-gcr version
-
-RUN /usr/local/bin/docker-credential-gcr version
+#ENV PATH=/usr/local/bin/docker-credential-gcr/:$PATH
 
 RUN useradd -ms /bin/bash helm
 
 USER helm
 
 # Configure the credential helper for GCR and Artifact Registry
-RUN /usr/local/bin/docker-credential-gcr configure-docker -include-artifact-registry
+#RUN /usr/local/bin/docker-credential-gcr configure-docker -include-artifact-registry
 
 ENTRYPOINT ["/builder/helm.bash"]
