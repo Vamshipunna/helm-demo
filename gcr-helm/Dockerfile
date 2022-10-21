@@ -31,9 +31,11 @@ RUN ls -ll /
 
 RUN ls -ll /usr/local/
 
+WORKDIR /builder
 
+RUN pwd
 
-COPY /builder/docker-credential-gcr /usr/local/bin/
+COPY ./docker-credential-gcr /usr/local/bin/
 
 RUN ls -ll /usr/local/bin/
 
