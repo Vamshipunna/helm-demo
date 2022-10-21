@@ -52,6 +52,6 @@ RUN useradd -ms /bin/bash helm
 USER helm
 
 # Configure the credential helper for GCR and Artifact Registry
-RUN docker-credential-gcr configure-docker -include-artifact-registry
+RUN /usr/local/bin/docker-credential-gcr configure-docker -include-artifact-registry
 
 ENTRYPOINT ["/builder/helm.bash"]
