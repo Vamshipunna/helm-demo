@@ -11,11 +11,11 @@ source ~/.bashrc
 
 #find / -iname .kube
 
-echo "Executing =================== gcloud commands"
-gcloud config get-value container/cluster
+# echo "Executing =================== gcloud commands"
+# gcloud config get-value container/cluster
 
-echo "---------Main command---------"
-gcloud container clusters get-credentials --project="devops-365510" --region="asia-south1" "helm-demo-cluster"
+# echo "---------Main command---------"
+# gcloud container clusters get-credentials --project="devops-365510" --region="asia-south1" "helm-demo-cluster"
 
 # If there is no current context, get one.
 if [[ $(kubectl config current-context 2> /dev/null) == "" && "$SKIP_CLUSTER_CONFIG" != true ]]; then
@@ -47,6 +47,9 @@ EOF
     fi
 fi
 
+echo "--------kubeconfig-----------"
+ls -ll /root
+cat /root/.kube/config
 # if HELM_VERSION starts with v2, initialize Helm
 if [[ $HELM_VERSION =~ ^v2 ]]; then
   echo "Running: helm init --client-only"
@@ -116,5 +119,5 @@ else
       echo "Running: helm $@"
   fi
   #helm "$@"
-  helm install oci://asia-south1-docker.pkg.dev/devops-365510/helm-demo/swaggerui --version 0.1.0 --generate-name --debug
+  helm install oci://asia-south1-docker.pkg.dev/devops-365510/helm-demo/swaggerui --version 0.1.0 --generate-name --debug --kubeconfig /root/.kube/config
 fi
