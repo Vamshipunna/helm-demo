@@ -35,7 +35,7 @@ WORKDIR /tmp
 
 RUN ls -ll
 
-COPY docker-credential-gcr /usr/local/bin/
+RUN cp /tmp/docker-credential-gcr /usr/local/bin/
 
 RUN ls -ll /usr/local/bin/
 
