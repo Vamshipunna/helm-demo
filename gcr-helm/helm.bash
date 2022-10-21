@@ -48,9 +48,8 @@ EOF
 fi
 
 echo "--------kubeconfig-----------"
-sudo su
-ls -ll /root
-cat /root/.kube/config
+sudo ls -ll /root
+sudo cat /root/.kube/config
 # if HELM_VERSION starts with v2, initialize Helm
 if [[ $HELM_VERSION =~ ^v2 ]]; then
   echo "Running: helm init --client-only"
