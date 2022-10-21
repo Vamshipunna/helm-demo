@@ -29,6 +29,8 @@ RUN ls -ll
 
 RUN ls -ll /
 
+RUN ls -ll /usr/local/
+
 RUN ls -ll /usr/local/bin/
   
 COPY ./docker-credential-gcr /usr/local/bin/
