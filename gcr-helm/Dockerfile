@@ -23,7 +23,13 @@ RUN curl --fail -sSL -O https://github.com/GoogleCloudPlatform/docker-credential
   rm docker-credential-gcr*.tar.gz && \
   chmod +x docker-credential-gcr
   
-RUN ls -ll /usr/local/bin
+RUN echo $PATH
+
+RUN ls -ll
+
+RUN ls -ll /
+
+RUN ls -ll /usr/local/bin/
   
 COPY ./docker-credential-gcr /usr/local/bin/
 
