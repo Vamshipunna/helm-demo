@@ -3,10 +3,9 @@ FROM gcr.io/cloud-builders/gcloud
 ARG HELM_VERSION=v3.8.1
 ENV HELM_VERSION=$HELM_VERSION
 ENV GCR_VERSION=2.1.0
-#COPY helm.bash /builder/helm.bash
+#COPY /builder/helm.bash
 							 
-RUN chmod +x /builder/helm.bash && \
-  mkdir -p /builder/helm && \
+RUN mkdir -p /builder/helm && \
   apt-get update && \
   apt-get install -y curl && \
   curl -SL https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz -o helm.tar.gz && \
