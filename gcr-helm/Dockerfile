@@ -38,4 +38,4 @@ USER helm
 # Configure the credential helper for GCR and Artifact Registry
 #RUN /usr/local/bin/docker-credential-gcr configure-docker -include-artifact-registry
 
-ENTRYPOINT ["/builder/helm.bash"]
+CMD /usr/local/bin/helm
