@@ -31,9 +31,9 @@ RUN chmod +x /builder/helm.bash && \
 ENV PATH=/builder/helm/:$PATH
 #ENV PATH=/usr/local/bin/docker-credential-gcr/:$PATH
 
-RUN useradd -ms /bin/bash helm
+#RUN useradd -ms /bin/bash helm
 
-USER helm
+#USER helm
 
 # Configure the credential helper for GCR and Artifact Registry
 #RUN /usr/local/bin/docker-credential-gcr configure-docker -include-artifact-registry
