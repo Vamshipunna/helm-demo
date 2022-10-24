@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: us.gcr.io/devops-365510/flaskapp
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
 
