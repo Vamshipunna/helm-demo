@@ -34,6 +34,7 @@
             <span class="ui green label">Completed</span>
             {% endif %}
             
+            
             {% if todo.complete == False %}
             <a class="ui blue button" href="/update/{{ todo.id }}">Finished</a>
             {% else %}
