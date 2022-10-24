@@ -8,7 +8,7 @@ image:
   repository: us.gcr.io/devops-365510/todoapp
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: latest
+  tag: IMAGE_TAG
 
 imagePullSecrets: []
 nameOverride: ""
@@ -71,7 +71,7 @@ resources: {}
 autoscaling:
   enabled: false
   minReplicas: 1
-  maxReplicas: 100
+  maxReplicas: 3
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
