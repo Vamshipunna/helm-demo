@@ -1,0 +1,60 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - '-c'
+      - >
+        docker build -t us.gcr.io/devops-365510/$_REPO_NAME:latest -t
+        us.gcr.io/devops-365510/$_REPO_NAME:$SHORT_SHA -f Dockerfile .
+        --no-cache
+    dir: src/todo/
+    id: BuildImage
+    entrypoint: /bin/bash
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - '-c'
+      - |
+        docker push us.gcr.io/devops-365510/$_REPO_NAME:latest
+        docker push us.gcr.io/devops-365510/$_REPO_NAME:$SHORT_SHA
+    dir: src/todo/
+    id: PushImage
+    entrypoint: /bin/bash
+  - name: us.gcr.io/devops-365510/gcr-helm
+    args:
+      - '-c'
+      - >
+        export HELM_EXPERIMENTAL_OCI=1
+
+        sed 's/IMAGE_TAG/$SHORT_SHA/g' ./values.yaml
+
+        sed -i 's/IMAGE_TAG/$SHORT_SHA/g' ./values.yaml
+
+        helm package . -d /tmp --version 0.1.0 && helm push /tmp/*-0.1.0.tgz
+        oci://asia-south1-docker.pkg.dev/devops-365510/$_ARTIFACT_REPO
+    dir: src/todo/helm
+    entrypoint: bash
+  - name: us.gcr.io/devops-365510/gcr-helm
+    args:
+      - '-c'
+      - >
+
+        export HELM_CACHE_HOME="/tmp" 
+
+        echo -y | gcloud auth configure-docker $_HELM_ARTIFACT_REGISTRY 
+
+        gcloud container clusters get-credentials --project="$_GCLOUD_PROJECT"
+        --region="$_CLOUDSDK_COMPUTE_REGION" "$_CLOUDSDK_CONTAINER_CLUSTER"
+
+        helm upgrade --install todoapp
+        oci://asia-south1-docker.pkg.dev/devops-365510/$_ARTIFACT_REPO/todoapp
+        --version 0.1.0 
+    dir: src/todo/helm/
+    entrypoint: bash
+options:
+  logging: CLOUD_LOGGING_ONLY
+substitutions:
+  _ARTIFACT_REPO: tododemo
+  _CLOUDSDK_CONTAINER_CLUSTER: helm-demo-cluster
+  _HELM_ARTIFACT_REGISTRY: asia-south1-docker.pkg.dev
+  _GCLOUD_PROJECT: devops-365510
+  _CLOUDSDK_COMPUTE_REGION: asia-south1
+  _REPO_NAME: todoapp
